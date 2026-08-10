@@ -298,6 +298,47 @@ const sendOtpEmail = async (email, name, otp) => {
   console.log(`OTP: ${otp}`);
   console.log(`=========================================`);
 
+  // Check for HTTP API Mailers (bypasses Render's firewall blocks on standard SMTP ports 25/465/587)
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (resendApiKey) {
+    try {
+      console.log('Sending OTP email using Resend HTTP API...');
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${resendApiKey}`
+        },
+        body: JSON.stringify({
+          from: process.env.SMTP_FROM_EMAIL || 'onboarding@resend.dev',
+          to: email,
+          subject: 'Dayflow HRMS - Password Reset OTP',
+          html: `
+            <div style="font-family: sans-serif; padding: 24px; max-width: 480px; margin: auto; border: 1px solid #e2e8f0; border-radius: 12px;">
+              <h2 style="color: #6366f1; margin-bottom: 16px;">Dayflow Password Reset</h2>
+              <p>Hi ${name},</p>
+              <p>You requested to reset your password. Use the following 6-digit One Time Password (OTP) to proceed with resetting your credentials. This code is valid for 3 minutes:</p>
+              <div style="background: #f4f6f9; padding: 16px; border-radius: 8px; text-align: center; font-size: 24px; font-weight: bold; letter-spacing: 4px; color: #0f172a; margin: 24px 0;">
+                ${otp}
+              </div>
+              <p style="font-size: 11px; color: #64748b;">If you did not initiate this request, you can safely ignore this email.</p>
+            </div>
+          `
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP ${response.status}`);
+      }
+
+      return { success: true, simulated: false };
+    } catch (error) {
+      console.error('Resend HTTP API error:', error.message);
+      throw new Error(`Resend HTTP delivery failed: ${error.message}`);
+    }
+  }
+
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
 
