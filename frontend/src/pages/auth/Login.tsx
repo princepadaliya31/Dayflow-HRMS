@@ -252,11 +252,11 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
                 fontFamily: "'Outfit', 'Inter', sans-serif",
                 fontWeight: 900,
                 fontSize: 20,
-                letterSpacing: '-0.04em',
+                letterSpacing: '-0.02em',
                 display: 'flex',
                 alignItems: 'center'
               }}>
-                dayflow
+                Dayflow
                 <span style={{ marginLeft: 3, fontSize: 10, alignSelf: 'flex-end', marginBottom: 2 }}>✦</span>
               </span>
             </div>

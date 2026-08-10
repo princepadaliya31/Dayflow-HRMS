@@ -89,7 +89,7 @@ export default function Sidebar({ role, currentPage, onNavigate }: SidebarProps)
             boxShadow: '0 2px 10px rgba(99,102,241,0.4)',
             position: 'relative'
           }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: 16 }}>d</span>
+            <span style={{ color: '#fff', fontWeight: 800, fontSize: 16 }}>D</span>
             <span style={{ position: 'absolute', right: 2, bottom: 2, color: '#fff', fontSize: 7 }}>✦</span>
           </div>
         ) : (
@@ -106,11 +106,11 @@ export default function Sidebar({ role, currentPage, onNavigate }: SidebarProps)
               fontFamily: "'Outfit', 'Inter', sans-serif",
               fontWeight: 800,
               fontSize: 18,
-              letterSpacing: '-0.04em',
+              letterSpacing: '-0.02em',
               display: 'flex',
               alignItems: 'center'
             }}>
-              dayflow
+              Dayflow
               <span style={{ marginLeft: 3, fontSize: 10, alignSelf: 'flex-end', marginBottom: 2 }}>✦</span>
             </span>
           </div>
