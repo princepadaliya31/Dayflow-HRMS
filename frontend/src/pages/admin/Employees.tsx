@@ -175,83 +175,88 @@ export default function AdminEmployees() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map(emp => (
-                <tr
-                  key={emp.id}
-                  className="border-b last:border-0 hover:bg-indigo-500/5 transition-colors cursor-pointer"
-                  style={{ borderColor: 'var(--border)' }}
-                  onClick={() => setSelected(emp)}
-                >
-                  <td className="px-5 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
-                        {emp.avatar}
-                      </div>
-                      <div>
-                        <p className="font-medium" style={{ color: 'var(--foreground)' }}>{emp.name}</p>
-                        <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>{emp.email}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-4" style={{ color: 'var(--muted-foreground)' }}>{emp.department}</td>
-                  <td className="px-5 py-4" style={{ color: 'var(--foreground)' }}>{emp.role}</td>
-                  <td className="px-5 py-4">
-                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize ${statusColors[emp.status]}`}>
-                      {emp.status.replace('-', ' ')}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 font-mono text-xs" style={{ color: 'var(--muted-foreground)' }}>{emp.joinDate}</td>
-                  <td className="px-5 py-4 font-mono text-sm font-medium" style={{ color: 'var(--foreground)' }}>
-                    ₹{emp.salary.toLocaleString('en-IN')}
-                  </td>
-                  <td className="px-5 py-4 relative">
-                    <button 
-                      style={{ color: 'var(--muted-foreground)' }} 
-                      className="hover:text-indigo-500 transition-colors cursor-pointer p-1 rounded-lg hover:bg-slate-100" 
-                      onClick={e => {
-                        e.stopPropagation();
-                        setActiveDropdownId(activeDropdownId === emp.id ? null : emp.id);
-                      }}
-                    >
-                      <MoreHorizontal size={16} />
-                    </button>
-                    {activeDropdownId === emp.id && (
-                      <>
-                        <div className="fixed inset-0 z-10" onClick={(e) => { e.stopPropagation(); setActiveDropdownId(null); }} />
-                        <div 
-                          style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)' }}
-                          className="absolute right-5 mt-1 w-28 rounded-xl border shadow-xl z-20 py-1 text-xs text-left"
-                        >
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleStartEdit(emp);
-                              setActiveDropdownId(null);
-                            }} 
-                            style={{ color: 'var(--foreground)' }}
-                            className="w-full px-3.5 py-2 hover:bg-indigo-500/5 transition-colors flex items-center gap-2 font-medium cursor-pointer"
-                          >
-                            <Edit2 size={13} className="text-indigo-500" />
-                            Edit
-                          </button>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDelete(emp.id);
-                              setActiveDropdownId(null);
-                            }} 
-                            className="w-full px-3.5 py-2 hover:bg-red-50 text-red-500 transition-colors flex items-center gap-2 font-medium cursor-pointer border-t"
-                            style={{ borderTopColor: 'var(--border)' }}
-                          >
-                            <Trash2 size={13} className="text-red-500" />
-                            Delete
-                          </button>
+              {filtered.map((emp, index) => {
+                const renderUpward = index >= filtered.length - 2;
+                return (
+                  <tr
+                    key={emp.id}
+                    className="border-b last:border-0 hover:bg-indigo-500/5 transition-colors cursor-pointer"
+                    style={{ borderColor: 'var(--border)' }}
+                    onClick={() => setSelected(emp)}
+                  >
+                    <td className="px-5 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                          {emp.avatar}
                         </div>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                        <div>
+                          <p className="font-medium" style={{ color: 'var(--foreground)' }}>{emp.name}</p>
+                          <p className="text-xs" style={{ color: 'var(--muted-foreground)' }}>{emp.email}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-5 py-4" style={{ color: 'var(--muted-foreground)' }}>{emp.department}</td>
+                    <td className="px-5 py-4" style={{ color: 'var(--foreground)' }}>{emp.role}</td>
+                    <td className="px-5 py-4">
+                      <span className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize ${statusColors[emp.status]}`}>
+                        {emp.status.replace('-', ' ')}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 font-mono text-xs" style={{ color: 'var(--muted-foreground)' }}>{emp.joinDate}</td>
+                    <td className="px-5 py-4 font-mono text-sm font-medium" style={{ color: 'var(--foreground)' }}>
+                      ₹{emp.salary.toLocaleString('en-IN')}
+                    </td>
+                    <td className="px-5 py-4 relative">
+                      <button 
+                        style={{ color: 'var(--muted-foreground)' }} 
+                        className="hover:text-indigo-500 transition-colors cursor-pointer p-1 rounded-lg hover:bg-slate-100" 
+                        onClick={e => {
+                          e.stopPropagation();
+                          setActiveDropdownId(activeDropdownId === emp.id ? null : emp.id);
+                        }}
+                      >
+                        <MoreHorizontal size={16} />
+                      </button>
+                      {activeDropdownId === emp.id && (
+                        <>
+                          <div className="fixed inset-0 z-10" onClick={(e) => { e.stopPropagation(); setActiveDropdownId(null); }} />
+                          <div 
+                            style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)' }}
+                            className={`absolute right-5 w-28 rounded-xl border shadow-xl z-20 py-1 text-xs text-left ${
+                              renderUpward ? 'bottom-8' : 'mt-1'
+                            }`}
+                          >
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleStartEdit(emp);
+                                setActiveDropdownId(null);
+                              }} 
+                              style={{ color: 'var(--foreground)' }}
+                              className="w-full px-3.5 py-2 hover:bg-indigo-500/5 transition-colors flex items-center gap-2 font-medium cursor-pointer"
+                            >
+                              <Edit2 size={13} className="text-indigo-500" />
+                              Edit
+                            </button>
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDelete(emp.id);
+                                setActiveDropdownId(null);
+                              }} 
+                              className="w-full px-3.5 py-2 hover:bg-red-50 text-red-500 transition-colors flex items-center gap-2 font-medium cursor-pointer border-t"
+                              style={{ borderTopColor: 'var(--border)' }}
+                            >
+                              <Trash2 size={13} className="text-red-500" />
+                              Delete
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
