@@ -1,42 +1,87 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Computer Monitor Screen -->
-  <rect x="10" y="32" width="80" height="52" rx="6" fill="#f8fafc" stroke="#0f172a" stroke-width="4" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <!-- Dashed outer boundary circle -->
+  <circle cx="250" cy="250" r="230" fill="none" stroke="#2b435b" stroke-width="7" stroke-dasharray="25 18" stroke-linecap="round" />
+
+  <!-- Background offset pastel cyan circle -->
+  <circle cx="270" cy="250" r="170" fill="#a5f3fc" opacity="0.65" />
+
+  <!-- 1. Top-Left Component: Tablet Screen and Gear -->
+  <!-- Gear teeth (drawn first so the gear body overlays their inner boundary) -->
+  <rect x="90" y="132" width="10" height="76" rx="3" fill="#ffffff" stroke="#2b435b" stroke-width="7" transform="rotate(0 95 170)" />
+  <rect x="90" y="132" width="10" height="76" rx="3" fill="#ffffff" stroke="#2b435b" stroke-width="7" transform="rotate(45 95 170)" />
+  <rect x="90" y="132" width="10" height="76" rx="3" fill="#ffffff" stroke="#2b435b" stroke-width="7" transform="rotate(90 95 170)" />
+  <rect x="90" y="132" width="10" height="76" rx="3" fill="#ffffff" stroke="#2b435b" stroke-width="7" transform="rotate(135 95 170)" />
   
-  <!-- Monitor Stand -->
-  <path d="M36,84 L64,84 L60,95 L40,95 Z" fill="#0f172a" stroke="#0f172a" stroke-width="2" stroke-linejoin="round" />
-  <line x1="20" y1="84" x2="80" y2="84" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
+  <!-- Tablet Rounded Rectangle Screen -->
+  <rect x="135" y="70" width="100" height="150" rx="16" fill="#ffffff" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  
+  <!-- Inside Tablet Screen: Bar Chart Rects -->
+  <rect x="150" y="115" width="16" height="40" rx="2" fill="#a5f3fc" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  <rect x="177" y="95" width="16" height="60" rx="2" fill="#a5f3fc" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  <rect x="204" y="125" width="16" height="30" rx="2" fill="#a5f3fc" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  
+  <!-- Inside Tablet Screen: Divider and Button -->
+  <line x1="150" y1="165" x2="220" y2="165" stroke="#2b435b" stroke-width="7" stroke-linecap="round" />
+  <rect x="155" y="178" width="60" height="18" rx="9" fill="#2b435b" />
 
-  <!-- Gear (Yellow) sitting on top of screen -->
-  <g stroke="#0f172a" stroke-width="3" stroke-linejoin="round">
-    <!-- Teeth -->
-    <rect x="47" y="6" width="6" height="32" rx="1.5" fill="#fde047" transform="rotate(0 50 22)" />
-    <rect x="47" y="6" width="6" height="32" rx="1.5" fill="#fde047" transform="rotate(45 50 22)" />
-    <rect x="47" y="6" width="6" height="32" rx="1.5" fill="#fde047" transform="rotate(90 50 22)" />
-    <rect x="47" y="6" width="6" height="32" rx="1.5" fill="#fde047" transform="rotate(135 50 22)" />
-    <!-- Center circle to blend teeth together -->
-    <circle cx="50" cy="22" r="11" fill="#fde047" stroke="none" />
-    <!-- Main gear outline circle -->
-    <circle cx="50" cy="22" r="11" fill="none" />
-    <!-- Gear center hole -->
-    <circle cx="50" cy="22" r="4.5" fill="#f8fafc" />
-  </g>
+  <!-- Gear main circle and hole overlay -->
+  <circle cx="95" cy="170" r="28" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+  <circle cx="95" cy="170" r="10" fill="#a5f3fc" stroke="#2b435b" stroke-width="7" />
 
-  <!-- Users inside the screen -->
-  <!-- Left User (Red) -->
-  <g>
-    <path d="M22,79 C22,69 29,67 32,67 C35,67 42,69 42,79 Z" fill="#fca5a5" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" />
-    <circle cx="32" cy="56" r="6.5" fill="#fca5a5" stroke="#0f172a" stroke-width="3" />
-  </g>
+  <!-- 2. Bottom-Left Component: Three Users and Gear Group -->
+  <!-- Dashed group outline arc -->
+  <path d="M 80 340 A 90 90 0 1 0 250 370" fill="none" stroke="#2b435b" stroke-width="5" stroke-dasharray="14 10" stroke-linecap="round" />
 
-  <!-- Right User (Green) -->
-  <g>
-    <path d="M58,79 C58,69 65,67 68,67 C71,67 78,69 78,79 Z" fill="#86efac" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" />
-    <circle cx="68" cy="56" r="6.5" fill="#86efac" stroke="#0f172a" stroke-width="3" />
-  </g>
+  <!-- Left User -->
+  <path d="M 95 350 C 95 325 145 325 145 350 Z" fill="#ffffff" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  <circle cx="120" cy="305" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
 
-  <!-- Center User (Blue) -->
-  <g>
-    <path d="M37,82 C37,70 45,68 50,68 C55,68 63,70 63,82 Z" fill="#93c5fd" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" />
-    <circle cx="50" cy="58" r="8" fill="#93c5fd" stroke="#0f172a" stroke-width="3" />
-  </g>
+  <!-- Right User -->
+  <path d="M 195 350 C 195 325 245 325 245 350 Z" fill="#ffffff" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  <circle cx="220" cy="305" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+
+  <!-- Bottom User -->
+  <path d="M 145 430 C 145 405 195 405 195 430 Z" fill="#ffffff" stroke="#2b435b" stroke-width="7" stroke-linejoin="round" />
+  <circle cx="170" cy="385" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+
+  <!-- Center Gear in user group (teeth + body + center hole) -->
+  <rect x="166" y="303" width="8" height="44" rx="2" fill="#ffffff" stroke="#2b435b" stroke-width="6" transform="rotate(0 170 325)" />
+  <rect x="166" y="303" width="8" height="44" rx="2" fill="#ffffff" stroke="#2b435b" stroke-width="6" transform="rotate(45 170 325)" />
+  <rect x="166" y="303" width="8" height="44" rx="2" fill="#ffffff" stroke="#2b435b" stroke-width="6" transform="rotate(90 170 325)" />
+  <rect x="166" y="303" width="8" height="44" rx="2" fill="#ffffff" stroke="#2b435b" stroke-width="6" transform="rotate(135 170 325)" />
+  <circle cx="170" cy="325" r="18" fill="#ffffff" stroke="#2b435b" stroke-width="6" />
+  <circle cx="170" cy="325" r="6" fill="#a5f3fc" stroke="#2b435b" stroke-width="5" />
+
+  <!-- 3. Right Component: Network of Connected Users -->
+  <!-- Network lines (placed first to layer underneath node circles) -->
+  <line x1="360" y1="155" x2="420" y2="270" stroke="#2b435b" stroke-width="7" />
+  <line x1="420" y1="270" x2="330" y2="370" stroke="#2b435b" stroke-width="7" />
+  
+  <!-- Branch lines ending in secondary blank nodes -->
+  <line x1="360" y1="155" x2="430" y2="130" stroke="#2b435b" stroke-width="7" />
+  <circle cx="430" cy="130" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+
+  <line x1="360" y1="155" x2="300" y2="245" stroke="#2b435b" stroke-width="7" />
+  <circle cx="300" cy="245" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+
+  <line x1="420" y1="270" x2="480" y2="270" stroke="#2b435b" stroke-width="7" />
+  <circle cx="480" cy="270" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+
+  <line x1="330" y1="370" x2="385" y2="445" stroke="#2b435b" stroke-width="7" />
+  <circle cx="385" cy="445" r="14" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+
+  <!-- Main network node 1 (Top-Right) -->
+  <circle cx="360" cy="155" r="24" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+  <circle cx="360" cy="147" r="7" fill="#ffffff" stroke="#2b435b" stroke-width="5" />
+  <path d="M 347 167 C 347 158 373 158 373 167 Z" fill="#ffffff" stroke="#2b435b" stroke-width="5" stroke-linejoin="round" />
+
+  <!-- Main network node 2 (Middle-Right) -->
+  <circle cx="420" cy="270" r="24" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+  <circle cx="420" cy="262" r="7" fill="#ffffff" stroke="#2b435b" stroke-width="5" />
+  <path d="M 407 282 C 407 273 433 273 433 282 Z" fill="#ffffff" stroke="#2b435b" stroke-width="5" stroke-linejoin="round" />
+
+  <!-- Main network node 3 (Bottom-Right) -->
+  <circle cx="330" cy="370" r="24" fill="#ffffff" stroke="#2b435b" stroke-width="7" />
+  <circle cx="330" cy="362" r="7" fill="#ffffff" stroke="#2b435b" stroke-width="5" />
+  <path d="M 317 382 C 317 373 343 373 343 382 Z" fill="#ffffff" stroke="#2b435b" stroke-width="5" stroke-linejoin="round" />
 </svg>
