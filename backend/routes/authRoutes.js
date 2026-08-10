@@ -316,6 +316,9 @@ const sendOtpEmail = async (email, name, otp) => {
           user: smtpUser,
           pass: smtpPass,
         },
+        connectionTimeout: 10000, // 10 seconds timeout
+        greetingTimeout: 10000,
+        socketTimeout: 10000,
       });
     } else {
       transporter = nodemailer.createTransport({
@@ -324,6 +327,9 @@ const sendOtpEmail = async (email, name, otp) => {
           user: smtpUser,
           pass: smtpPass,
         },
+        connectionTimeout: 10000, // 10 seconds timeout
+        greetingTimeout: 10000,
+        socketTimeout: 10000,
       });
     }
 
