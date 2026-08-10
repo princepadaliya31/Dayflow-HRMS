@@ -122,7 +122,7 @@ function AppShell() {
 
   const renderEmployeePage = () => {
     switch (page) {
-      case 'dashboard':  return <EmployeeDashboard />
+      case 'dashboard':  return <EmployeeDashboard onNavigate={setPage} />
       case 'attendance': return <EmployeeAttendance />
       case 'leaves':     return <EmployeeLeaves />
       case 'payroll':    return <EmployeePayroll />

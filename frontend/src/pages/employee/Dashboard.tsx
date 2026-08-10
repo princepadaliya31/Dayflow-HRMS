@@ -5,7 +5,11 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts'
 
-export default function EmployeeDashboard() {
+interface EmployeeDashboardProps {
+  onNavigate?: (page: string) => void
+}
+
+export default function EmployeeDashboard({ onNavigate }: EmployeeDashboardProps) {
   const { user, dashboardStats, attendanceRecords } = useAuth()
 
   if (!dashboardStats) {
@@ -34,9 +38,30 @@ export default function EmployeeDashboard() {
   const remainingLeaves = 27 - metrics.totalLeaves
 
   const empStats = [
-    { label: "Today's Status", value: statusVal, icon: <UserCheck size={18} className="text-emerald-500" />, color: 'bg-emerald-500/10', sub: statusSub },
-    { label: 'Leave Balance', value: `${remainingLeaves} days`, icon: <CalendarOff size={18} className="text-amber-500" />, color: 'bg-amber-500/10', sub: `${metrics.pendingLeavesCount} pending approval` },
-    { label: 'Days Present', value: `${metrics.daysPresent} days`, icon: <Clock size={18} className="text-sky-500" />, color: 'bg-sky-500/10', sub: `${metrics.daysAbsent} absent days` },
+    { 
+      label: "Today's Status", 
+      value: statusVal, 
+      icon: <UserCheck size={18} className="text-emerald-500" />, 
+      color: 'bg-emerald-500/10', 
+      sub: statusSub,
+      onClick: () => onNavigate?.('attendance')
+    },
+    { 
+      label: 'Leave Balance', 
+      value: `${remainingLeaves} days`, 
+      icon: <CalendarOff size={18} className="text-amber-500" />, 
+      color: 'bg-amber-500/10', 
+      sub: `${metrics.pendingLeavesCount} pending approval`,
+      onClick: () => onNavigate?.('leaves')
+    },
+    { 
+      label: 'Days Present', 
+      value: `${metrics.daysPresent} days`, 
+      icon: <Clock size={18} className="text-sky-500" />, 
+      color: 'bg-sky-500/10', 
+      sub: `${metrics.daysAbsent} absent days`,
+      onClick: () => onNavigate?.('attendance')
+    },
     { label: 'Last Salary Slip', value: `₹${metrics.lastSalarySlip.toLocaleString('en-IN')}`, icon: <DollarSign size={18} className="text-purple-500" />, color: 'bg-purple-500/10', sub: 'Paid / Pending' },
     { label: 'Performance', value: '4.5 / 5', icon: <TrendingUp size={18} className="text-indigo-500" />, color: 'bg-indigo-500/10', sub: 'Q2 2026 review' },
     { label: 'Alerts', value: dashboardStats.notifications?.length || 0, icon: <AlertCircle size={18} className="text-red-500" />, color: 'bg-red-500/10', sub: 'Action items pending' },
@@ -81,7 +106,7 @@ export default function EmployeeDashboard() {
       {/* Stats grid */}
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
         {empStats.map((s, i) => (
-          <StatsCard key={i} label={s.label} value={s.value} icon={s.icon} color={s.color} sub={s.sub} />
+          <StatsCard key={i} label={s.label} value={s.value} icon={s.icon} color={s.color} sub={s.sub} onClick={s.onClick} />
         ))}
       </div>
 

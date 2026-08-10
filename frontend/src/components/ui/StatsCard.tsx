@@ -6,13 +6,15 @@ interface StatsCardProps {
   color: string
   trend?: { value: string; up: boolean }
   tooltipContent?: string
+  onClick?: () => void
 }
 
-export default function StatsCard({ label, value, sub, icon, color, trend, tooltipContent }: StatsCardProps) {
+export default function StatsCard({ label, value, sub, icon, color, trend, tooltipContent, onClick }: StatsCardProps) {
   return (
     <div
-      style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)' }}
-      className="rounded-xl border p-5 flex flex-col gap-3 hover:shadow-md transition-shadow relative group"
+      onClick={onClick}
+      style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', cursor: onClick ? 'pointer' : 'default' }}
+      className={`rounded-xl border p-5 flex flex-col gap-3 transition-shadow relative group ${onClick ? 'hover:shadow-md hover:border-indigo-500/50' : ''}`}
     >
       <div className="flex items-start justify-between">
         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${color}`}>
