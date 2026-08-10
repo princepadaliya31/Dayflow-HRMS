@@ -8,7 +8,11 @@ import {
 
 const DEPT_COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe', '#e0e7ff', '#93c5fd', '#60a5fa']
 
-export default function HRDashboard() {
+interface HRDashboardProps {
+  onNavigate?: (page: string) => void
+}
+
+export default function HRDashboard({ onNavigate }: HRDashboardProps) {
   const { leaveRequests, dashboardStats } = useAuth()
 
   if (!dashboardStats) {
@@ -27,24 +31,45 @@ export default function HRDashboard() {
       value: metrics.totalEmployees, 
       icon: <Users size={18} className="text-indigo-500" />, 
       color: 'bg-indigo-500/10',
-      tooltipContent: metrics.totalEmployeesBreakdown ? `${metrics.totalEmployeesBreakdown.employees} Employees, ${metrics.totalEmployeesBreakdown.hr} HR` : undefined
+      tooltipContent: metrics.totalEmployeesBreakdown ? `${metrics.totalEmployeesBreakdown.employees} Employees, ${metrics.totalEmployeesBreakdown.hr} HR` : undefined,
+      onClick: () => onNavigate?.('employees')
     },
-    { label: 'Attendance Rate', value: `${metrics.attendanceRate}%`, icon: <UserCheck size={18} className="text-emerald-500" />, color: 'bg-emerald-500/10' },
-    { label: 'Pending Leaves', value: metrics.pendingLeaves, icon: <CalendarOff size={18} className="text-amber-500" />, color: 'bg-amber-500/10' },
-    { label: 'Monthly Payroll', value: `₹${metrics.monthlyExpense.toLocaleString('en-IN')}`, icon: <DollarSign size={18} className="text-purple-500" />, color: 'bg-purple-500/10' },
+    { 
+      label: 'Attendance Rate', 
+      value: `${metrics.attendanceRate}%`, 
+      icon: <UserCheck size={18} className="text-emerald-500" />, 
+      color: 'bg-emerald-500/10',
+      onClick: () => onNavigate?.('attendance')
+    },
+    { 
+      label: 'Pending Leaves', 
+      value: metrics.pendingLeaves, 
+      icon: <CalendarOff size={18} className="text-amber-500" />, 
+      color: 'bg-amber-500/10',
+      onClick: () => onNavigate?.('leaves')
+    },
+    { 
+      label: 'Monthly Payroll', 
+      value: `₹${metrics.monthlyExpense.toLocaleString('en-IN')}`, 
+      icon: <DollarSign size={18} className="text-purple-500" />, 
+      color: 'bg-purple-500/10',
+      onClick: () => onNavigate?.('payroll')
+    },
     { 
       label: 'On Leave Today', 
       value: metrics.onLeaveEmployees, 
       icon: <Clock size={18} className="text-sky-500" />, 
       color: 'bg-sky-500/10',
-      tooltipContent: metrics.onLeaveEmployeesBreakdown ? `${metrics.onLeaveEmployeesBreakdown.employees} Employees, ${metrics.onLeaveEmployeesBreakdown.hr} HR` : undefined
+      tooltipContent: metrics.onLeaveEmployeesBreakdown ? `${metrics.onLeaveEmployeesBreakdown.employees} Employees, ${metrics.onLeaveEmployeesBreakdown.hr} HR` : undefined,
+      onClick: () => onNavigate?.('leaves')
     },
     { 
       label: 'Active Staff', 
       value: metrics.activeEmployees, 
       icon: <UserCheck size={18} className="text-teal-500" />, 
       color: 'bg-teal-500/10',
-      tooltipContent: metrics.activeEmployeesBreakdown ? `${metrics.activeEmployeesBreakdown.employees} Employees, ${metrics.activeEmployeesBreakdown.hr} HR` : undefined
+      tooltipContent: metrics.activeEmployeesBreakdown ? `${metrics.activeEmployeesBreakdown.employees} Employees, ${metrics.activeEmployeesBreakdown.hr} HR` : undefined,
+      onClick: () => onNavigate?.('attendance')
     },
   ]
 
@@ -55,7 +80,7 @@ export default function HRDashboard() {
       {/* Stats grid */}
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
         {hrStats.map((s, i) => (
-          <StatsCard key={i} label={s.label} value={s.value} icon={s.icon} color={s.color} tooltipContent={s.tooltipContent} />
+          <StatsCard key={i} label={s.label} value={s.value} icon={s.icon} color={s.color} tooltipContent={s.tooltipContent} onClick={s.onClick} />
         ))}
       </div>
 

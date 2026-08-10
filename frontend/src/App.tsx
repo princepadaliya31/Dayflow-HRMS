@@ -86,7 +86,7 @@ function AppShell() {
 
   const renderAdminPage = () => {
     switch (page) {
-      case 'dashboard':  return <AdminDashboard />
+      case 'dashboard':  return <AdminDashboard onNavigate={setPage} />
       case 'employees':  return <AdminEmployees />
       case 'attendance': return <AdminAttendance />
       case 'leaves':     return <AdminLeaves />
@@ -103,7 +103,7 @@ function AppShell() {
 
   const renderHRPage = () => {
     switch (page) {
-      case 'dashboard':  return <HRDashboard />
+      case 'dashboard':  return <HRDashboard onNavigate={setPage} />
       case 'employees':  return <HREmployees />
       case 'attendance': return <HRAttendance />
       case 'leaves':     return <HRLeaves />
