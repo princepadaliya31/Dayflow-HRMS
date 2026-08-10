@@ -121,15 +121,27 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
           {/* Centered Logo Header */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 28 }}>
             <div style={{
-              width: 44, height: 44, borderRadius: 12,
-              background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 16px rgba(99, 102, 241, 0.3)',
+              background: '#4f46e5',
+              padding: '6px 16px',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              boxShadow: '0 8px 24px -4px rgba(79, 70, 229, 0.3)',
               marginBottom: 12,
             }}>
-              <span style={{ color: '#fff', fontWeight: 800, fontSize: 20 }}>D</span>
+              <span style={{
+                color: '#ffffff',
+                fontFamily: "'Outfit', 'Inter', sans-serif",
+                fontWeight: 900,
+                fontSize: 20,
+                letterSpacing: '-0.04em',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                dayflow
+                <span style={{ marginLeft: 3, fontSize: 10, alignSelf: 'flex-end', marginBottom: 2 }}>✦</span>
+              </span>
             </div>
-            <h1 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>Dayflow</h1>
             <p style={{ color: '#64748b', fontSize: 13, marginTop: 4 }}>Create your workflow profile</p>
           </div>
 

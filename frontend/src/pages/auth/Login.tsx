@@ -239,14 +239,28 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
           {/* Logo header */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 28 }}>
             <div style={{
-              width: 48, height: 48, borderRadius: 14,
-              backgroundColor: '#4f46e5', display: 'flex', alignItems: 'center', justifySelf: 'center', justifyContent: 'center',
-              color: 'white', fontWeight: 800, fontSize: 22, boxShadow: '0 8px 16px -4px rgba(79, 70, 229, 0.4)'
+              background: '#4f46e5',
+              padding: '6px 16px',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              boxShadow: '0 8px 24px -4px rgba(79, 70, 229, 0.3)',
+              marginBottom: 12,
             }}>
-              D
+              <span style={{
+                color: '#ffffff',
+                fontFamily: "'Outfit', 'Inter', sans-serif",
+                fontWeight: 900,
+                fontSize: 20,
+                letterSpacing: '-0.04em',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                dayflow
+                <span style={{ marginLeft: 3, fontSize: 10, alignSelf: 'flex-end', marginBottom: 2 }}>✦</span>
+              </span>
             </div>
-            <h2 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginTop: 16, marginBottom: 4 }}>Dayflow</h2>
-            <p style={{ fontSize: 13, color: '#64748b', fontWeight: 500 }}>
+            <p style={{ fontSize: 13, color: '#64748b', fontWeight: 500, marginTop: 4 }}>
               {forgotFlowStep !== 'none' ? 'Reset your account password' : 'Your workflow, beautifully managed'}
             </p>
           </div>

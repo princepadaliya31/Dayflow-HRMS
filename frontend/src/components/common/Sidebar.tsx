@@ -77,22 +77,43 @@ export default function Sidebar({ role, currentPage, onNavigate }: SidebarProps)
       {/* Logo */}
       <div style={{
         height: 60, display: 'flex', alignItems: 'center',
-        padding: collapsed ? '0 16px' : '0 18px',
+        padding: collapsed ? '0 14px' : '0 18px',
         borderBottom: '1px solid rgba(255,255,255,0.05)',
         flexShrink: 0,
       }}>
-        <div style={{
-          width: 32, height: 32, borderRadius: 9, flexShrink: 0,
-          background: 'linear-gradient(135deg,#6366f1,#4f46e5)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 2px 10px rgba(99,102,241,0.4)',
-        }}>
-          <span style={{ color: '#fff', fontWeight: 800, fontSize: 15 }}>D</span>
-        </div>
-        {!collapsed && (
-          <span style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 16, marginLeft: 10, whiteSpace: 'nowrap', letterSpacing: '-0.02em' }}>
-            Dayflow
-          </span>
+        {collapsed ? (
+          <div style={{
+            width: 32, height: 32, borderRadius: 9, flexShrink: 0,
+            background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 2px 10px rgba(99,102,241,0.4)',
+            position: 'relative'
+          }}>
+            <span style={{ color: '#fff', fontWeight: 800, fontSize: 16 }}>d</span>
+            <span style={{ position: 'absolute', right: 2, bottom: 2, color: '#fff', fontSize: 7 }}>✦</span>
+          </div>
+        ) : (
+          <div style={{
+            background: '#4f46e5',
+            padding: '6px 14px',
+            borderRadius: 10,
+            display: 'flex',
+            alignItems: 'center',
+            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)'
+          }}>
+            <span style={{
+              color: '#ffffff',
+              fontFamily: "'Outfit', 'Inter', sans-serif",
+              fontWeight: 800,
+              fontSize: 18,
+              letterSpacing: '-0.04em',
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+              dayflow
+              <span style={{ marginLeft: 3, fontSize: 10, alignSelf: 'flex-end', marginBottom: 2 }}>✦</span>
+            </span>
+          </div>
         )}
       </div>
 
