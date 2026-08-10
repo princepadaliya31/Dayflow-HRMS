@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { UserCheck, UserX, Search, Filter } from 'lucide-react'
 
 export default function RequestsPage() {
-  const { user, employees, updateEmployee, deleteEmployee } = useAuth()
+  const { user, employees, updateEmployee, deleteEmployee, refreshAllData } = useAuth()
   const [search, setSearch] = useState('')
   const [roleFilter, setRoleFilter] = useState<'all' | 'hr' | 'employee'>('all')
+
+  useEffect(() => {
+    refreshAllData()
+  }, [])
 
   const requests = employees.filter(e => {
     if (e.status !== 'pending') return false
