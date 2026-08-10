@@ -62,9 +62,30 @@ export default function EmployeeDashboard({ onNavigate }: EmployeeDashboardProps
       sub: `${metrics.daysAbsent} absent days`,
       onClick: () => onNavigate?.('attendance')
     },
-    { label: 'Last Salary Slip', value: `₹${metrics.lastSalarySlip.toLocaleString('en-IN')}`, icon: <DollarSign size={18} className="text-purple-500" />, color: 'bg-purple-500/10', sub: 'Paid / Pending' },
-    { label: 'Performance', value: '4.5 / 5', icon: <TrendingUp size={18} className="text-indigo-500" />, color: 'bg-indigo-500/10', sub: 'Q2 2026 review' },
-    { label: 'Alerts', value: dashboardStats.notifications?.length || 0, icon: <AlertCircle size={18} className="text-red-500" />, color: 'bg-red-500/10', sub: 'Action items pending' },
+    { 
+      label: 'Last Salary Slip', 
+      value: `₹${metrics.lastSalarySlip.toLocaleString('en-IN')}`, 
+      icon: <DollarSign size={18} className="text-purple-500" />, 
+      color: 'bg-purple-500/10', 
+      sub: 'Paid / Pending',
+      onClick: () => onNavigate?.('payroll')
+    },
+    { 
+      label: 'Performance', 
+      value: '4.5 / 5', 
+      icon: <TrendingUp size={18} className="text-indigo-500" />, 
+      color: 'bg-indigo-500/10', 
+      sub: 'Q2 2026 review',
+      onClick: () => onNavigate?.('performance')
+    },
+    { 
+      label: 'Alerts', 
+      value: dashboardStats.notifications?.length || 0, 
+      icon: <AlertCircle size={18} className="text-red-500" />, 
+      color: 'bg-red-500/10', 
+      sub: 'Action items pending',
+      onClick: () => onNavigate?.('notifications')
+    },
   ]
 
   // Build chartData for a full Mon-Fri week, merging employee's actual hours with realistic defaults
