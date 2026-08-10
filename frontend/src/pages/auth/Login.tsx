@@ -525,6 +525,11 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
                       {emailError}
                     </p>
                   )}
+                  {error && (
+                    <p style={{ color: '#ef4444', fontSize: 12, fontWeight: 'bold', marginTop: 4 }}>
+                      {error}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -573,11 +578,6 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
                       {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
                   </div>
-                  {error && (
-                    <p style={{ color: '#ef4444', fontSize: 12, fontWeight: 'bold', marginTop: 4 }}>
-                      {error}
-                    </p>
-                  )}
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
