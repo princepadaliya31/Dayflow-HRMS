@@ -316,6 +316,7 @@ const sendOtpEmail = async (email, name, otp) => {
           user: smtpUser,
           pass: smtpPass,
         },
+        family: 4, // Force IPv4 to prevent Render ENETUNREACH IPv6 issue
         connectionTimeout: 10000, // 10 seconds timeout
         greetingTimeout: 10000,
         socketTimeout: 10000,
@@ -327,6 +328,7 @@ const sendOtpEmail = async (email, name, otp) => {
           user: smtpUser,
           pass: smtpPass,
         },
+        family: 4, // Force IPv4 to prevent Render ENETUNREACH IPv6 issue
         connectionTimeout: 10000, // 10 seconds timeout
         greetingTimeout: 10000,
         socketTimeout: 10000,
