@@ -132,11 +132,12 @@ export default function HREmployees() {
 
   const handleConfirmDelete = async () => {
     if (!deleteConfirmId) return
+    const id = deleteConfirmId
+    setDeleteConfirmId(null)
+    setDeleteConfirmName(null)
+    setSelected(null)
     try {
-      await deleteEmployee(deleteConfirmId)
-      setDeleteConfirmId(null)
-      setDeleteConfirmName(null)
-      setSelected(null)
+      await deleteEmployee(id)
     } catch (err: any) {
       alert(err.message || 'Failed to delete employee')
     }
@@ -325,7 +326,10 @@ export default function HREmployees() {
             </div>
             <div className="flex gap-3 mt-5">
               <button
-                onClick={() => triggerDeleteConfirm(selected.id, selected.name)}
+                onClick={() => {
+                  triggerDeleteConfirm(selected.id, selected.name);
+                  setSelected(null);
+                }}
                 className="flex-1 py-2.5 text-sm font-medium rounded-xl border border-red-200 text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
               >
                 Delete Employee
