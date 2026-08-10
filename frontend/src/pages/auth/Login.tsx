@@ -503,6 +503,21 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
               </div>
 
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {error && (
+                  <div style={{
+                    backgroundColor: '#fdf2f2',
+                    border: '1px solid #fde8e8',
+                    color: '#e02424',
+                    padding: '12px 16px',
+                    borderRadius: '10px',
+                    textAlign: 'center',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                  }}>
+                    {error}
+                  </div>
+                )}
+
                 <div>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>
                     Email Address
@@ -518,16 +533,11 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
                     }}
                     placeholder={config.demo.email}
                     autoComplete="off"
-                    style={emailError || error ? { borderColor: '#ef4444' } : {}}
+                    style={emailError ? { borderColor: '#ef4444' } : {}}
                   />
                   {emailError && (
                     <p style={{ color: '#ef4444', fontSize: 12, fontWeight: 'bold', marginTop: 4 }}>
                       {emailError}
-                    </p>
-                  )}
-                  {error && (
-                    <p style={{ color: '#ef4444', fontSize: 12, fontWeight: 'bold', marginTop: 4 }}>
-                      {error}
                     </p>
                   )}
                 </div>
@@ -564,7 +574,7 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
                       }}
                       placeholder={config.demo.pass}
                       autoComplete="new-password"
-                      style={error ? { paddingRight: 44, borderColor: '#ef4444' } : { paddingRight: 44 }}
+                      style={{ paddingRight: 44 }}
                     />
                     <button
                       type="button"
