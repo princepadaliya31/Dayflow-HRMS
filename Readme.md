@@ -2,6 +2,8 @@
 
 A premium, full-stack, multi-role human resource management and employee attendance platform. The platform allows employees to manage daily attendance clock actions (check-in, break, check-out), apply for leaves, view payroll cost details, and configure bank account info. It also features comprehensive management boards for HR Managers and system administrators to organize departments, analyze work records, schedule holidays, and manage candidate recruitment pipelines.
 
+**🌐 Live Demo:** [https://dayflow-hrms-blue.vercel.app/](https://dayflow-hrms-blue.vercel.app/)
+
 ---
 
 ## 🏗️ Architecture Overview
