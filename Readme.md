@@ -1,158 +1,256 @@
 # 💼 Dayflow - HRMS & Attendance Management System
 
-A premium, full-stack, multi-role human resource management and employee attendance platform. The platform allows employees to manage daily attendance clock actions (check-in, break, check-out), apply for leaves, view payroll cost details, and configure bank account info. It also features comprehensive management boards for HR Managers and system administrators to organize departments, analyze work records, schedule holidays, and manage candidate recruitment pipelines.
+A comprehensive, production-ready **Human Resource Management and Attendance System** built with **Node.js (Express)**, **React (TypeScript + Vite)**, and **MongoDB**. The project provides a premium, responsive workflow for clock actions, leave applications, payroll cost analysis, recruitment desks, and visual reports.
 
-**🌐 Live Demo:** [https://dayflow-hrms-blue.vercel.app/](https://dayflow-hrms-blue.vercel.app/)
+🚀 **Live Demo**: [dayflow-hrms-blue.vercel.app](https://dayflow-hrms-blue.vercel.app/)
 
----
-
-## 🏗️ Architecture Overview
-
-The system follows a decoupled client-server architecture with secure authentication, real-time metrics, and database persistence:
-
-```mermaid
-graph TD
-    Client[React 19 & Vite Frontend] -- REST API / HTTPS --> Server[Node.js / Express Backend]
-    Server -- Persistence --> DB[(MongoDB Database)]
-    Server -- Password Reset OTPs --> SMTP[Nodemailer SMTP Client]
-```
+🌐 **Deployment Hosting**:
+* **Frontend**: Vercel
+* **Backend**: Render
+* **Database**: MongoDB Atlas (Cloud)
 
 ---
 
 ## 🌟 Key Features
 
-### 👤 Multi-Role Dashboard & Access Control
-The application provides distinct layouts, navigations, and actions tailored specifically to three active roles:
-*   **System Admin:** High-level platform administration, system synchronization, and global organization metrics.
-*   **HR Manager:** 
-    *   **Employee Onboarding:** Register new employees and assign unique IDs.
-    *   **Recruitment Pipeline:** Create open job positions, manage candidates, and convert hired candidates into employee user profiles instantly.
-    *   **Leave Management:** Approve or reject leave applications submitted by staff members.
-    *   **Interactive Reports:** Query real-time attendance, leaves, and payroll costing logs with customizable filters and download Excel/CSV sheets.
-*   **Employee (Staff):** 
-    *   **Attendance Logger:** Log daily clock actions (Check-In, Go on Break, Resume, Check-Out) with auto-tracked timezone alignment.
-    *   **Leave Portal:** Check active leave statuses and apply for new requests with duration dates.
-    *   **Personal Profile & Settings:** Update contact numbers, security passwords, and bank details (IFSC, Account Number, Branch).
+### 🔐 Authentication & Authorization
+- Secure JWT-based authentication with BCrypt password hashing.
+- Role-Based Access Control (RBAC):
+  - **EMPLOYEE:** Clock attendance, apply for leaves, track payroll costing slips, and modify bank/personal info.
+  - **HR MANAGER:** Onboard staff, manage candidates, approve leaves, schedule holiday events, and extract reports.
+  - **ADMIN:** Complete dashboard syncs, organization analytics, and database monitoring.
+- Dynamic error banners that instantly clear as soon as the user starts typing.
+- Forgot Password flow with Nodemailer-dispatched 6-digit OTP codes expiring in 3 minutes.
 
-### ⏰ Timezone-Aware Attendance Tracking
-*   Uses local machine formatting (`toLocaleDateString('en-CA')`) instead of generic UTC transitions.
-*   Ensures early-morning and late-night check-ins register correctly under the local date, preventing incorrect date shifts.
+### ⏰ Timezone-Aware Attendance Logging
+- Daily check-in, check-out, and break management logs.
+- Timezone offset alignment (`toLocaleDateString('en-CA')`) preventing shifts for late-night or early-morning clock logs.
+- Weekly work hours charts mapping active preparation hours from Monday to Friday.
 
-### 📊 Employee Work Hours Analytics
-*   Renders a full-width weekly tracking chart mapping actual logged attendance hours from Monday to Friday.
-*   Overlays default baseline work hours for incomplete days to keep chart points fully aligned.
+### 📄 Leaves and Holiday Events
+- Single-page application calendar displaying public holidays and events as colored inline strips.
+- Leave application portal with real-time approval status badges.
 
-### 📅 Interactive Holiday Calendar Redesign
-*   Displays corporate events and national holidays as highlighted inline badges directly inside a full-width grid calendar.
-*   Guarantees state synchronization on component mounting, ensuring details remain consistent during reloads.
+### 📈 Recruitment & Interactive Reports
+- Full recruitment board: post open jobs, track candidate applications, and convert hired candidates into user accounts automatically.
+- Custom report dashboard with real-time filters and Excel/CSV exporters formatted to prevent date display errors.
 
-### ✉️ Nodemailer OTP Password Recovery
-*   Generates a secure, random 6-digit verification code with a strict 3-minute expiration window.
-*   Dispatches recovery emails using Nodemailer SMTP, displaying success/failure feedback popups dynamically to users.
+---
+
+## 🏗️ System Architecture
+
+┌────────────────────────────────────┐
+│      Frontend (React + Vite)       │
+│  Context API • TypeScript • Axios  │
+└────────────────┬───────────────────┘
+                 │ HTTPS / REST API
+                 ▼
+┌────────────────────────────────────┐
+│         Express JWT Filter         │
+│ Authentication & Token Verification│
+└────────────────┬───────────────────┘
+                 ▼
+┌────────────────────────────────────┐
+│         REST Api Routers           │
+└────────────────┬───────────────────┘
+                 ▼
+┌────────────────────────────────────┐
+│         Controllers / Hooks        │
+│   Business Validation & Logic      │
+└────────────────┬───────────────────┘
+                 ▼
+┌────────────────────────────────────┐
+│       MongoDB Mongoose Schemas     │
+└────────────────┬───────────────────┘
+                 ▼
+┌────────────────────────────────────┐
+│      MongoDB Atlas / Local DB      │
+└────────────────────────────────────┘
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Frontend
-*   **Core Framework:** React 19 & Vite
-*   **Styling & Design:** TailwindCSS v4, Vanilla CSS Custom Tokens, and Lucide React Icons
-*   **Data Visualization:** Recharts (Responsive Weekly Charts)
-*   **State Management:** React Context API (AuthContext, ThemeContext)
-*   **Routing:** React Router v6
-
-### Backend
-*   **Core Framework:** Express.js & Node.js
-*   **Database ORM:** Mongoose & MongoDB
-*   **Security:** JSON Web Token (JWT) stateless authorization & Bcrypt password hashing
-*   **Mail Client:** Nodemailer SMTP Integration
+- **Frontend:** React 19, TypeScript, Vite 8, Tailwind CSS, Recharts, Lucide Icons, React Router DOM v6
+- **Backend:** Node.js, Express, Mongoose, JSON Web Tokens (JWT), BcryptJS, Nodemailer
+- **Database:** MongoDB Atlas (Cloud) / MongoDB Community Server (Local)
+- **Deployment:** Vercel (Frontend), Render (Backend), MongoDB Atlas (Cloud Database)
 
 ---
 
-## 📂 Directory Structure
+## 📂 Project Structure
 
 ```text
-Dayflow-HRMS/
-├── backend/                    # Node.js / Express API Service
-│   ├── config/                 # Database connection config
-│   ├── middleware/             # JWT auth & route protection filters
-│   ├── models/                 # Mongoose schemas (User, Attendance, Job, Candidate, etc.)
-│   ├── routes/                 # REST API Router Endpoints
-│   ├── scripts/                # Database seed scripts
-│   ├── server.js               # Express application entry point
-│   ├── package.json            # Backend package configuration
-│   └── .env                    # Environment variables configuration
-└── frontend/                   # React Vite Client
-    ├── src/
-    │   ├── components/         # Shared components (Header, Sidebar, ProtectedRoute)
-    │   ├── context/            # AuthContext provider and reducers
-    │   ├── layouts/            # Role-based workspace frame layouts
-    │   ├── pages/              # Role-specific dashboard views & Settings
-    │   ├── utils/              # API Client wrappers
-    │   ├── App.tsx             # Application router mount
-    │   ├── index.css           # Global theme tokens and styles
-    │   └── main.tsx            # Client entry point
-    ├── package.json            # Frontend package configuration
-    └── vite.config.ts          # Vite compilation setup
+Dayflow-HRMS
+├── backend
+│   ├── config/                 # Database configuration
+│   ├── middleware/             # Route protection middleware
+│   ├── models/                 # Mongoose collection models
+│   ├── routes/                 # API controllers and endpoint handlers
+│   ├── scripts/                # Database seed script
+│   ├── server.js               # Application entry point
+│   └── package.json
+│
+└── frontend
+    ├── src/components/         # Reusable dashboard widgets
+    ├── src/context/            # Global Auth Context and Reducers
+    ├── src/layouts/            # Role workspace frame layouts
+    ├── src/pages/              # Role views (Admin, HR, Employee)
+    ├── src/utils/              # API Client helpers
+    ├── package.json
+    └── vite.config.ts
 ```
 
 ---
 
-## 🚀 Setup & Installation
+## 🔗 Important APIs
+
+| Method | Endpoint | Description |
+|:---:|:---|:---|
+| **POST** | `/api/auth/register` | Register New User Profile |
+| **POST** | `/api/auth/login` | User Authentication (Returns JWT & user data) |
+| **PUT** | `/api/auth/profile` | Update User Name, Email, Phone |
+| **PUT** | `/api/auth/profile/password` | Update Hashed Security Password |
+| **POST** | `/api/auth/forgot-password` | Generate and Email Password Reset OTP |
+| **POST** | `/api/auth/verify-otp` | Verify 6-digit numeric recovery OTP |
+| **POST** | `/api/auth/reset-password` | Save New Password after verification |
+| **POST** | `/api/attendance/check-in` | Log check-in action |
+| **POST** | `/api/attendance/break-start` | Go on active break |
+| **POST** | `/api/attendance/break-end` | End break and resume work |
+| **POST** | `/api/attendance/check-out` | Log check-out action |
+| **POST** | `/api/leaves` | Apply for Leave (Employee) |
+| **PUT** | `/api/leaves/{id}/status` | Approve or Reject Leave Request (HR/Admin) |
+| **POST** | `/api/recruitment/jobs` | Post a New Job opening |
+| **POST** | `/api/recruitment/candidates` | Register Candidate to Job opening |
+| **POST** | `/api/recruitment/candidates/{id}/hire` | Convert hired candidate into active Employee user |
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+### Frontend
+- **Core:** React 19, TypeScript, Vite 8
+- **Styling:** Tailwind CSS, PostCSS, Lucide React
+- **Data Visualization:** Recharts (weekly analytics)
+- **Routing:** React Router DOM v6
+
+### Backend
+- **Core:** Node.js, Express.js
+- **Security:** BcryptJS, jsonwebtoken
+- **Mail:** Nodemailer SMTP integration
+- **Database ORM:** Mongoose & MongoDB
+
+---
+
+## 🚀 Local Setup & Running Guide
 
 ### Prerequisites
-*   [Node.js](https://nodejs.org/) (v18 or higher)
-*   [MongoDB Community Edition](https://www.mongodb.com/try/download/community) running locally on port `27017`
+* **Node.js** (v18+ recommended) and **npm**.
+* **MongoDB** (Ensure MongoDB is running locally on port `27017` or use MongoDB Atlas).
 
-### 1. Database Setup
-1. Start your local MongoDB server:
-   ```bash
-   mongod
-   ```
-2. The backend server will automatically connect to MongoDB and initialize the required database collections.
+---
 
-### 2. Backend Configuration
-1. Navigate to the `backend/` directory:
+### 1. Backend Setup
+
+1. Navigate to the `backend` directory:
    ```bash
    cd backend
    ```
-2. Create or verify the `.env` environment variables file:
+
+2. Create/update the `.env` file in the `backend` directory:
    ```env
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/dayflow-hrms
-   JWT_SECRET=your_jwt_secret_key_here
+   MONGO_URI=mongodb://localhost:27017/dayflow-hrms
+   JWT_SECRET=your_jwt_signing_key_here
+   FRONTEND_URL=http://localhost:5173
+   NODE_ENV=development
    
    # SMTP mail config for OTP resets (Gmail Example)
-   EMAIL_HOST=smtp.gmail.com
-   EMAIL_PORT=585
-   EMAIL_USER=your-email@gmail.com
-   EMAIL_PASS=your-gmail-app-password
+   SMTP_USER=your-email@gmail.com
+   SMTP_PASS=your-gmail-app-password
+   SMTP_FROM_NAME=Dayflow HRMS
    ```
+
 3. Install dependencies:
    ```bash
    npm install
    ```
-4. Seed your database with demo roles (Admin, HR Manager, Employee) and initial metrics:
+
+4. Seed the database with initial demo roles and records:
    ```bash
    npm run db:seed
    ```
+
 5. Launch the backend server:
    ```bash
    npm run dev
    ```
-   The backend server runs on `http://localhost:5000`.
+   The backend will start and listen on port **`5000`**.
 
-### 3. Frontend Setup
-1. Navigate to the `frontend/` directory:
+---
+
+### 2. Frontend Setup
+
+1. Navigate to the `frontend` directory:
    ```bash
    cd ../frontend
    ```
+
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Run the client application in development mode:
+
+3. Start the Vite development server:
    ```bash
    npm run dev
    ```
-   The frontend application will boot up at `http://localhost:5173`.
+   The frontend will start and be available at **`http://localhost:5173`**.
+
+---
+
+### 🔑 Test Credentials (Admin, HR & Employee)
+
+The application seeds a default database. You can log in using the following accounts:
+
+* **Administrator Account**:
+  * **Email**: `admin@gmail.com`
+  * **Password**: `admin123`
+* **HR Manager Account**:
+  * **Email**: `hr@gmail.com`
+  * **Password**: `HR@123`
+* **Regular Employee Account**:
+  * **Email**: `employee@gmail.com`
+  * **Password**: `Emp@123`
+
+---
+
+## 🧪 Verification & Build Status
+
+The application build validation suite ensures that the frontend and backend interact seamlessly.
+
+| Step | Metric | Status |
+|---|---|---|
+| 1 | Mongoose Database Seeds | ✅ 100% Loaded |
+| 2 | REST Endpoints Validation | ✅ Passed |
+| 3 | Frontend Build Verification | ✅ Vite Compiled Successfully |
+| 4 | JWT Auth Filter Validation | ✅ Protected Routes Active |
+| 5 | Build Status | ✅ SUCCESS |
+
+---
+
+## 🤖 My AI Usage
+
+During the development of this project, I paired with **Antigravity**, a Google DeepMind agentic coding assistant, to accelerate delivery and maintain clean code standards:
+
+1. **Architecture & Database Schema**:
+   * Designed decoupled MongoDB schemas mapping user accounts, candidate status steps, attendance check-ins, leave applications, and holiday events.
+2. **Security & Validation Flows**:
+   * Programmed JWT-based authorization and Bcrypt verification endpoints.
+   * Integrated local timezone logic (`toLocaleDateString('en-CA')`) to safeguard attendance log calculations.
+   * Connected Nodemailer to generate secure 3-minute OTP verification codes.
+3. **Frontend Dashboard Views**:
+   * Implemented React state handlers and functional closures (`setUser(prev => ...)`) to eliminate race conditions.
+   * Tailored Tailwind CSS classes for premium glassmorphism layouts and responsive weekly charts.
+4. **Interactive Reports & CSV Exports**:
+   * Formatted report generators to automatically prepended spaces to CSV numerical dates, avoiding Excel width parsing errors.
