@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  --background: #f0f2f5;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #e8eaf0;
+  --secondary-foreground: #475569;
+  --muted: #f4f6f9;
+  --muted-foreground: #64748b;
+  --accent: #6366f1;
+  --accent-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #f8fafc;
+  --ring: rgba(99,102,241,0.35);
+  --radius: 12px;
+  --sidebar: #0f172a;
+  --sidebar-fg: #94a3b8;
+  --sidebar-active: rgba(99,102,241,0.15);
+  --sidebar-active-fg: #a5b4fc;
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.07), 0 1px 2px rgba(15,23,42,0.05);
+  --shadow-md: 0 4px 16px rgba(15,23,42,0.10), 0 2px 6px rgba(15,23,42,0.06);
+  --shadow-lg: 0 12px 40px rgba(15,23,42,0.14), 0 4px 12px rgba(15,23,42,0.08);
+  --shadow-xl: 0 24px 64px rgba(15,23,42,0.18);
+  --auth-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+}
+
+.dark {
+  --background: #080d18;
+  --foreground: #e2e8f0;
+  --card: #0f1929;
+  --card-foreground: #e2e8f0;
+  --primary: #818cf8;
+  --primary-foreground: #0f172a;
+  --secondary: #172033;
+  --secondary-foreground: #94a3b8;
+  --muted: #111e30;
+  --muted-foreground: #64748b;
+  --accent: #818cf8;
+  --accent-foreground: #0f172a;
+  --border: #1a2940;
+  --input: #0d1826;
+  --ring: rgba(129,140,248,0.3);
+  --sidebar: #05090f;
+  --sidebar-fg: #64748b;
+  --sidebar-active: rgba(99,102,241,0.18);
+  --sidebar-active-fg: #a5b4fc;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* ── Scrollbars ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); }
+
+/* ── Focus ring ────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ── Form inputs ───────────────────────────────────────── */
+.df-input {
+  width: 100%;
+  background: var(--input);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 11px 14px;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  outline: none;
+}
+.df-input::placeholder { color: var(--muted-foreground); }
+.df-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--ring);
+  background: var(--card);
+}
+.df-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.df-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 20px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.df-btn:active { transform: scale(0.98); }
+
+.df-btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.35);
+}
+.df-btn-primary:hover {
+  background: #4f46e5;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transform: translateY(-1px);
+}
+
+.df-btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--foreground);
+}
+.df-btn-outline:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.df-btn-ghost {
+  background: transparent;
+  color: var(--muted-foreground);
+}
+.df-btn-ghost:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+.df-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 0%, #f3e8ff 0%, #f8fafc 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+.auth-form-side {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+.auth-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(99, 102, 241, 0.12) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-radius: 24px !important;
+  padding: 36px 32px !important;
+  box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+.auth-card .df-input {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+.auth-card .df-input::placeholder {
+  color: #94a3b8 !important;
+}
+.auth-card .df-input:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+  background: #ffffff !important;
+}
+.auth-card select.df-input option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+.auth-card label {
+  color: #475569 !important;
+}
+
+/* ── Grid dot pattern ──────────────────────────────────── */
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(165,180,252,0.25) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Stat card hover ───────────────────────────────────── */
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── Table ─────────────────────────────────────────────── */
+.df-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.df-table thead tr { background: var(--muted); }
+.df-table th {
+  text-align: left;
+  padding: 12px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+}
+.df-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+}
+.df-table tbody tr { transition: background 0.12s; }
+.df-table tbody tr:last-child td { border-bottom: none; }
+.df-table tbody tr:hover { background: rgba(99,102,241,0.04); }
+
+/* ── Badge ─────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  text-transform: capitalize;
+}
+.badge-success { background: rgba(16,185,129,0.1); color: #059669; }
+.badge-warning { background: rgba(245,158,11,0.1); color: #d97706; }
+.badge-danger  { background: rgba(239,68,68,0.1);  color: #dc2626; }
+.badge-info    { background: rgba(14,165,233,0.1);  color: #0284c7; }
+.badge-indigo  { background: rgba(99,102,241,0.1);  color: #6366f1; }
+.badge-slate   { background: rgba(100,116,139,0.1); color: #64748b; }
+
+/* ── Sidebar ───────────────────────────────────────────── */
+.sidebar { background: var(--sidebar); }
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--sidebar-fg);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  transition: background 0.12s, color 0.12s;
+}
+.sidebar-link:hover { background: rgba(255,255,255,0.05); color: #e2e8f0; }
+.sidebar-link.active {
+  background: var(--sidebar-active);
+  color: var(--sidebar-active-fg);
+}
+.sidebar-link.active svg { color: #818cf8; }
+
+/* ── Modal backdrop ────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+  animation: fadeIn 0.15s ease;
+}
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 480px;
+  animation: slideUp 0.2s ease;
+}
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+@keyframes slideUp { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
+
+/* ── Tooltip / Dropdown ────────────────────────────────── */
+.dropdown {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideUp 0.15s ease;
+}
+
+/* ── Charts tooltip ────────────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-md) !important;
+  font-size: 12px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Transitions ───────────────────────────────────────── */
+.page-enter { animation: pageFade 0.2s ease; }
+@keyframes pageFade { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+
+/* ── Selection ─────────────────────────────────────────── */
+::selection { background: rgba(99,102,241,0.2); color: var(--primary); }
+
+/* ── Print Media Query ── */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt, #printable-receipt * {
+    visibility: visible;
+  }
+  #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+    padding: 20px;
+    border: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-modal {
+    border: none !important;
+    box-shadow: none !important;
+    background: white !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+}
