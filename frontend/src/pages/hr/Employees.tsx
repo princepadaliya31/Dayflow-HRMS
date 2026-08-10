@@ -122,14 +122,23 @@ export default function HREmployees() {
     }
   }
 
-  const handleDelete = async (empId: string) => {
-    if (confirm('Are you sure you want to delete this employee?')) {
-      try {
-        await deleteEmployee(empId)
-        setSelected(null)
-      } catch (err: any) {
-        alert(err.message || 'Failed to delete employee')
-      }
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null)
+  const [deleteConfirmName, setDeleteConfirmName] = useState<string | null>(null)
+
+  const triggerDeleteConfirm = (empId: string, empName: string) => {
+    setDeleteConfirmId(empId)
+    setDeleteConfirmName(empName)
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!deleteConfirmId) return
+    try {
+      await deleteEmployee(deleteConfirmId)
+      setDeleteConfirmId(null)
+      setDeleteConfirmName(null)
+      setSelected(null)
+    } catch (err: any) {
+      alert(err.message || 'Failed to delete employee')
     }
   }
 
@@ -241,7 +250,7 @@ export default function HREmployees() {
                             <button 
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleDelete(emp.id);
+                                triggerDeleteConfirm(emp.id, emp.name);
                                 setActiveDropdownId(null);
                               }} 
                               className="w-full px-3.5 py-2 hover:bg-red-50 text-red-500 transition-colors flex items-center gap-2 font-medium cursor-pointer border-t"
@@ -316,7 +325,7 @@ export default function HREmployees() {
             </div>
             <div className="flex gap-3 mt-5">
               <button
-                onClick={() => handleDelete(selected.id)}
+                onClick={() => triggerDeleteConfirm(selected.id, selected.name)}
                 className="flex-1 py-2.5 text-sm font-medium rounded-xl border border-red-200 text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
               >
                 Delete Employee
@@ -429,6 +438,41 @@ export default function HREmployees() {
               <button type="submit" className="flex-1 py-2.5 text-sm font-medium rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 transition-colors cursor-pointer">{editingEmployee ? 'Save Changes' : 'Create Employee'}</button>
             </div>
           </form>
+        </div>
+      )}
+      {/* Custom Delete Confirmation Modal */}
+      {deleteConfirmId && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(null); }}>
+          <div 
+            style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)' }}
+            className="w-full max-w-sm rounded-2xl border p-6 shadow-2xl space-y-4"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-500/10 text-red-600 flex items-center justify-center">
+                <Trash2 size={22} />
+              </div>
+              <h3 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>Delete Employee</h3>
+              <p className="text-sm" style={{ color: 'var(--muted-foreground)' }}>
+                Are you sure you want to delete <strong style={{ color: 'var(--foreground)' }}>{deleteConfirmName}</strong>? This action is permanent and cannot be undone.
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <button 
+                onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(null); }}
+                style={{ color: 'var(--foreground)', borderColor: 'var(--border)' }}
+                className="flex-1 py-2.5 text-sm font-semibold rounded-xl border hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleConfirmDelete}
+                className="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
